@@ -6,13 +6,26 @@ def get_fnames(datadir):
     flist=glob.glob('*.txt')
     return flist
 
-files=get_fnames('cleaneddata')
+def isSexN(datafile):
+    file=open(datafile)
+    linelist=file.readlines()
+    i=0
+    while i < len(linelist):
+        if linelist[i] == "Sex: N\n":
+            print datafile+' has an N entry'
+            return True
+        i+=1
+    return False
+    
+isSexN('cleaneddata/jamesm_data_475.txt')
 
-def getSexData(datafile):
-    os.system('grep Sex '+datafile)
-     
 '''
-for fname in files:
-    getSexData('THOMAS_0464.txt')
-    os.system('grep -c N *')
+def chSexNM(datafile):
+    file=open(datafile,'w')
+    linelist=file.readlines()
+    
+
+    
+     
+files=get_fnames('cleaneddata')
 '''
