@@ -11,21 +11,30 @@ def isSexN(datafile):
     linelist=file.readlines()
     i=0
     while i < len(linelist):
+        print 'on line ',i
         if linelist[i] == "Sex: N\n":
-            print datafile+' has an N entry'
+            print 'This file has an N entry'
             return True
         i+=1
+    print 'No N found'
     return False
-    
-isSexN('cleaneddata/jamesm_data_475.txt')
 
-'''
 def chSexNM(datafile):
-    file=open(datafile,'w')
-    linelist=file.readlines()
-    
+    filetext = open(datafile).read()
+    print 'Changing N to M in '+datafile
+    filetext=filetext.replace(': N',': M')
+    chdatafile = open(datafile,'w')
+    chdatafile.write(filetext)
+    chdatafile.close()
+    print 'done!'
 
-    
-     
-files=get_fnames('cleaneddata')
-'''
+datadir='cleaneddata'
+filelist = get_fnames(datadir)
+nch=0
+for f in filelist:
+    print 'in '+f
+    if isSexN(f): 
+        chSexNM(f)
+        nch+=1
+print 'Finished: made '+str(nch)+' changes!'
+
